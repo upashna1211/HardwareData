@@ -1,0 +1,16 @@
+Hardware <- readxl::read_xlsx("/Users/upashna/Desktop/Projects/Hardware.xlsx")
+ ggplot(data = Hardware, aes(x = Date, y = Hware)) +
+          geom_line(color = "blue") + 
+          geom_point(color = "red", aes(size = Date), alpha = 0.1) +
+          labs(x = "Date", 
+               y = "Sales in Dollars $",
+               title = "Trend line for Hardware sales from 2006 to 2019"
+          )
+        
+ # Converting Date into Time Series
+ 
+ HW.ts <- ts(Hardware$Hware, start = c(2006,1), end = c(2019,12), frequency = 12)
+ HW.ts
+ w <- stl(HW.ts, s.window = "periodic")
+ plot(w)
+ 
